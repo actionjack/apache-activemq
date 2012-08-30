@@ -1,6 +1,7 @@
 %define debug_package %{nil}
+%define __os_install_post %{nil}
 
-%global amqversion 5.4.2
+%global amqversion 5.6.0
 # If this is a snapshot, put the date here and uncomment
 #global snapshot_version 20100519
 
@@ -59,6 +60,7 @@ ActiveMQ Messaging Broker
 /bin/true
 
 %install
+export DONT_STRIP=1
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{amqhome}
 mv * $RPM_BUILD_ROOT%{amqhome}
@@ -157,8 +159,11 @@ fi
 %{_javadir}
 
 %changelog
-* Thu Jan 06 2011 James Casey <james.casey@cern.ch> - 5.4.2-1%{?dist}
-- rebuild for 5.4.2
+* Thu Aug 30 2012 Martin Jackson <martin@uncommonsense-uk.com> - 5.6.0-2%{?dist}
+- Update of wrapper.conf patch file to fix failed patch
+- Disabled striping of binaries
+* Thu Jan 06 2011 James Casey <james.casey@cern.ch> - 5.6.0-1%{?dist}
+- rebuild for 5.6.0
 * Sun Nov 07 2010 James Casey <jamesc.000@gmail.com> - 5.4.1-1%{?dist}
 - rebuild for 5.4.1
 >>>>>>> 142c0af86d97849fe67e53396e0f48a711addf19:activemq.spec
